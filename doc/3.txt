@@ -1,0 +1,50 @@
+Overview
+[[[
+Level 3 - Predictable seed attack
+
+Difficulty:
+  Rules: [***] (777 win streak, 2000 rounds)
+  Seed:  [**-] (time(0))
+  PRNG:  XXXXX (glibc rand())
+]]]
+
+Description
+[[[
+The third level is still a seed attack, but a bit more advanced.
+Since using a fixed seed for RNGs kinda defeats the purpose, most
+programs use some value that changes just enough to not be the same
+across multiple launches.
+
+Case in point - Minecraft! It uses (or at least used at some point)
+the current time as the world seed if no seed is specified.
+]]]
+
+Intended approach
+[[[
+If you can generate the same numbers as the challenge, you can predict
+the answers! You just need to figure out a way to copy the internal "state"
+of the challenge's RNG. This will be the way to go for the rest of the main
+challenges - copy the state, copy the algorithm, win!
+]]]
+
+Hint 1
+[[[
+This is the only challenge without a hardcoded PRNG algorithm - that's
+by design, to make it easier. You are not supposed to reverse-engineer it - 
+you can use it as-is.
+]]]
+
+Hint 2
+[[[
+The original program was written in C, and the easiest solution would be
+to just clone the relevant parts in a C program of your own.
+]]]
+
+Technical note
+[[[
+This challenge was compiled and tested with with gcc 14.1.1 and glibc 2.39.
+The rand()'s algorithm hasn't changed in a while and there is no reason
+to expect it to, but you never know...
+Recompiling the source for some other OS or architecture may render the
+challenge unsolvable, in theory. "It Depends"(tm)
+]]]
