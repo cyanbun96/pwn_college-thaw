@@ -27,12 +27,13 @@ unsigned int getRandBit(){
 
 unsigned int getSeed(){
 	unsigned int ret = 0;
-	getentropy(&ret, 4);
+	if(getentropy(&ret, 4) != 0)
+		exit(1);
 	return ret;
 }
 
 void getFlag(){
-	char buf[64];
+	char buf[64] = {0};
 	int fd = open("/flag", O_RDONLY);
 	read(fd, buf, 63);
 	puts(buf);

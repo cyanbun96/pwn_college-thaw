@@ -19,7 +19,8 @@ unsigned int getRandBit(){
 
 unsigned int getSeed(){
 	unsigned int ret = 0;
-	getentropy(&ret, 4);
+	if(getentropy(&ret, 4) != 0)
+		exit(1);
 	unsigned int mask = 0;
 	for(int i = 0; i < lfsr_len; ++i) // gotta be a better way
 		mask = ((mask << 1) | 1); // don't care if doesn't work better
@@ -28,7 +29,7 @@ unsigned int getSeed(){
 }
 
 void getFlag(){
-	char buf[64];
+	char buf[64] = {0};
 	int fd = open("/flag", O_RDONLY);
 	read(fd, buf, 63);
 	puts(buf);

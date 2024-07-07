@@ -38,12 +38,13 @@ unsigned int getRandBit(){
 }
 
 unsigned int getSeed(){
-	getentropy(&state, 4*32);
+	if(getentropy(&state, 4*32) != 0)
+		exit(1);
 	return 0;
 }
 
 void getFlag(){
-	char buf[64];
+	char buf[64] = {0};
 	int fd = open("/flag", O_RDONLY);
 	read(fd, buf, 63);
 	puts(buf);
@@ -52,7 +53,10 @@ void getFlag(){
 }
 
 int main(){
-	puts("[placeholder intro]");
+	puts("Welcome to \"The House Always Wins\"!");
+	puts("The CPU flips a coin, you guess the result.");
+	puts("0 - heads, 1 - tails.");
+	puts("Read the text file in /challenge/ for hints!");
 	puts("Win conditions: streak == 10, wins + losses <= 2000");
 	unsigned long wins = 0, losses = 0, streak = 0;
 	getSeed();

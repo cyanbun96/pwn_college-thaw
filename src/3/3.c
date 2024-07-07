@@ -23,7 +23,7 @@ unsigned int getSeed(){
 }
 
 void getFlag(){
-	char buf[64];
+	char buf[64] = {0};
 	int fd = open("/flag", O_RDONLY);
 	read(fd, buf, 63);
 	puts(buf);
