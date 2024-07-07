@@ -3,11 +3,12 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <string.h>
+#include <time.h>
 
+int lfsr_len = 31;
 unsigned int lfsr = 1337;
-unsigned int lfsr_len = 7;
-unsigned int tap1 = 2;
-unsigned int tap2 = 3;
+unsigned int tap1 = 5;
+unsigned int tap2 = 7;
 
 unsigned int getRandBit(){
 	unsigned int ret = lfsr & 1;
@@ -18,16 +19,7 @@ unsigned int getRandBit(){
 
 unsigned int getSeed(){
 	unsigned int ret = 0;
-	char buf[20];
-	memset(buf, 0, 20);
-	int fd = open("/flag", O_RDONLY);
-	if(fd < 1){
-		puts("Can't open /flag");
-		exit(3);
-	}
-	read(fd, buf, 19);
-	for(int i = 0; buf[i]; ++i)
-		ret += (buf[i] << i % 3) * ((31337 << (i % 5)) ^ i);
+	getentropy(&ret, 4);
 	unsigned int mask = 0;
 	for(int i = 0; i < lfsr_len; ++i) // gotta be a better way
 		mask = ((mask << 1) | 1); // don't care if doesn't work better
@@ -45,10 +37,12 @@ void getFlag(){
 }
 
 int main(){
-	puts("Win conditions: streak == 777, wins + losses <= 2000");
+	puts("You know the rules.");
 	unsigned long wins = 0, losses = 0, streak = 0;
 	lfsr = getSeed();
-	/*for(int j = 0; j < 1000; ++j){ //debug stuf pleas ignore
+	/*for(int j = 0; j < 100000; ++j){ //debug stuf pleas ignore
+		printf("%u\n", lfsr);
+		getRandBit();
 		printf("%d\t%u\t", j, lfsr);
 		for(int i = 0; i < lfsr_len; ++i)
 			putchar('0' + ((lfsr >> i) & 1));
