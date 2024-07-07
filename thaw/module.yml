@@ -1,0 +1,16 @@
+name: Main
+challenges:
+  - id: thaw1
+    name: Level1
+  - id: thaw2
+    name: Level2
+  - id: thaw3
+    name: Level3
+  - id: thaw4
+    name: Level4
+  - id: thaw5
+    name: Level5
+  - id: thaw6
+    name: Level6
+  - id: thaw7
+    name: Level7

@@ -1,0 +1,65 @@
+Welcome to "The House Always Wins!"
+
+This dojo is centered around PRNGs (Pseudo-Random Number Generators)
+and the exploitation of the "pseudo" part.
+
+If you have any experience with reverse-engineering and want to learn
+by doing, feel free to stop reading now and go dig around in the bins - 
+all main challenges should be solvable without any guidance!
+
+If you get stuck and need a hint, or want to learn more about the
+intended approach and the concepts behind it - each challenge has a
+series of encrypted hints. Dectypting them is easy:
+
+>$ echo "aGFpIGhld3dvdSBpbWEgaGludCA6Mwo=" | base64 -d
+           ^^^ that's the enctypted hint in base64
+
+In any case, good luck!
+  -CyanBun96
+
+Overview
+[[[
+Level 1 - Tutorial
+
+Difficulty:
+  Rules: [*--] (10 win streak, 2000 rounds)
+  Seed:  XXXXX (getentropy)
+  PRNG:  [***] (LAF)
+]]]
+
+Description
+[[[
+The first level is introductory - all you need to do is win 10 times
+in a row! With chances being 50/50, that should take around 2048 tries
+on average. The 2000 round limit might trip you up a bit, but you can
+retry the challenge as much as you want.
+]]]
+
+Intended approach
+[[[
+The PRNG in this level is quite strong, and the seed (initial state) is
+practically uncrackable. The win condition is easy enough though, thus...
+
+Bruteforce! This level is mostly here to help you automate the interactions
+through something like pwntools for Python. While you, technically, can
+solve every challenge in the main dojo with pen, paper and power of will,
+automation is expected and not considered cheating.
+
+Feeding any valid input ('1' or '0' in ASCII + newline) 2000 times should
+do the trick!
+]]]
+
+Algorithms and implementation details 
+[[[
+Linear Additive Feedback random number generator is a slightly adjusted
+(literally 1 bit of difference) version of the glibc's default rand()
+The details and reasons for them will be discussed later...
+
+getentropy() calls getrandom() under the hood, which reads from the same
+source as /dev/urandom. If you happen to crack it - expect global chaos.
+
+Sources:
+man 3 random
+man 3 getentropy
+man 2 getrandom
+]]]
