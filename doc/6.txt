@@ -1,0 +1,54 @@
+Overview
+[[[
+Level 6 - Real rand()!
+
+Difficulty:
+  Rules: [***] (777 win streak, 2000 rounds)
+  Seed:  XXXXX (getentropy)
+  PRNG:  [**-] (glibc rand() TYPE_0)
+]]]
+
+Description
+[[[
+You've reached the Real PRNG Level! The algorithm used here is a verbatim copy
+of the one used in rand()! Or rather, "an" algorithm from it... The glibc
+implementation supports various state lengths, and it uses a different
+algorithm for all lengths but the shortest. A much simpler one. And the
+binary doesn't call rand() either - the algorithm is a function in the main
+program so that you don't have to dive into shared libs when debugging. Still,
+it's almost Real! That's powerful stuff you're delving into!
+]]]
+
+Relevant code snippet
+[[[
+Source: glibc-2.39, random_r.c, line 353
+
+int __random_r(struct random_data *buf, int32_t *result)
+...
+if (buf->rand_type == TYPE_0)
+    {
+      int32_t val = ((state[0] * 1103515245U) + 12345U) & 0x7fffffff;
+      state[0] = val;
+      *result = val;
+    }
+...
+
+The __random_r function takes a full random_data struct and pulls the state
+out of that, but for TYPE_0 the rest of the structure is irrelevant. It has
+been replaced by a single variable in the challenge binary.
+]]]
+
+Intended approach
+[[[
+So far you've been reading and writing ones and zeroes, and it doesn't stop
+here! While the state is stored as an integer, it's still a bunch of ones and
+zeroes underneath. The challenge gets one number and splits it into multiple
+values - just like in challenges 1-3. The algorithm here requires a bit more
+than XORing and shifting, but it's still a one-liner.
+]]]
+
+Fun fact
+[[[
+Another word for "zero" is "cipher"!
+And now you're breathing manually.
+]]]

@@ -12,36 +12,33 @@ Description
 [[[
 Now comes the fun part - predicting future outputs on previous outputs alone!
 The PRNG implemented here is a Linear Feedback Shift Register - one of the
-simplest, yet effective and elegant solutions.
+simplest, yet effective and elegant solutions for RNG. Check the following
+hint and play around with the lfsr_toy in /challenge/ to get the hang of it!
 ]]]
 
-###TODO
+LFSR basics
+[[[
+#TODO
+]]]
+
 Intended approach
 [[[
-If you can generate the same numbers as the challenge, you can predict
-the answers! You just need to figure out a way to copy the internal "state"
-of the challenge's RNG. This will be the way to go for the rest of the main
-challenges - copy the state, copy the algorithm, win!
+While this challenge's implementation of LFSR can be beaten in several ways,
+it is mostly intended as a practical guide on infering the RNG's internal
+state from its outputs alone. Reverse-engineer the algorithm, get a few
+results from the challenge and use them to match the challenge's outputs!
 ]]]
 
 Hint 1
 [[[
-This is the only challenge without a hardcoded PRNG algorithm - that's
-by design, to make it easier. You are not supposed to reverse-engineer it - 
-you can use it as-is.
+In case of LFSRs, you can get the initial state by just reading the ammount
+of bits equal to LFSR's length. Combine that and the fact that the seed is
+fixed to develop a flexible solution that can be reused in the future.
 ]]]
 
-Hint 2
+Bonus hint
 [[[
-The original program was written in C, and the easiest solution would be
-to just clone the relevant parts in a C program of your own.
-]]]
-
-Technical note
-[[[
-This challenge was compiled and tested with with gcc 14.1.1 and glibc 2.39.
-The rand()'s algorithm hasn't changed in a while and there is no reason
-to expect it to, but you never know...
-Recompiling the source for some other OS or architecture may render the
-challenge unsolvable, in theory. "It Depends"(tm)
+LFSR's outputs loop around after 2 to the power of LFSR's length minus one.
+Here it's 2**7-1=127, so exploiting that is a valid approach!
+The next challenge though...
 ]]]

@@ -1,0 +1,58 @@
+Overview
+[[[
+Level 7 - Real rand(), for real this time!
+
+Difficulty:
+  Rules: [***] (777 win streak, 2000 rounds)
+  Seed:  XXXXX (getentropy)
+  PRNG:  [***] (glibc rand())
+]]]
+
+Description
+[[[
+The final boss!
+Good luck.
+I mean, you made it this far.
+I believe in you!
+]]]
+
+Implementation details
+[[[
+Rant time!
+
+man 3 random states "The random() function uses a nonlinear additive feedback
+random number generator...". The non-linear bit? It's literally a bit. A single
+bit of nonlinearity. Here's the code from random_r.c:
+...
+/* Chucking least random bit.  */
+      *result = val >> 1;
+...
+Everything else about it is totally linear. Thus knowing the state you can
+predict the next output with 50/50 chances.
+
+And it's not some fun non-linear function either - it just yeets the same bit.
+
+That's one bit away from perfection. I hate it.
+
+The original version of this challenge actually called rand(), and as far as I'm
+concerned it's virtually impossible to solve it deterministically.
+Now the challenge uses an algorithm that's practically the same, except for this
+one bit. That means a good solution can solve it in the same number of turns
+every time, and nothing is left up to RNGsus.
+
+If you want to crack actual rand() - it's just a few minor adjustments to the
+same algorithm. I've decided that the challenge is close enough to still be
+just as educational without the unneeded coin flip. The main point of this
+series is to illustrate the vulnerabilities of linear PRNGs in a satisfying and
+empowering way, and keeping that single bit of pure chance would be like
+decorating a gorgeous cake with a cherry made of shit. </rant>
+]]]
+
+Final note - read after finishing
+[[[
+Thank you for playing THAW! I hope you had as much fun as I did making it <3
+If you have any feedback or other thoughts to share - cyanbun96@gmail.com
+  -Cyan
+
+c2b13e23cabcf0e2a75be2415851e2d3
+]]]

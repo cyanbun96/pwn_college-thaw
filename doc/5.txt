@@ -1,0 +1,30 @@
+Overview
+[[[
+Level 5 - LFSR 2
+
+Difficulty:
+  Rules: [***] (777 win streak, 2000 rounds)
+  Seed:  XXXXX (getentropy)
+  PRNG:  [**-] (31-bit LFSR)
+]]]
+
+Description
+[[[
+It's level 4, but harder! The LFSR's period is 2**31-1 so you can't exploit
+that, and the seed is also unpredictable. The algorithm is the same though,
+so if you solved 4 just the right way, all it's going to take here is 
+adjusting a few variables!
+]]]
+
+Intended approach
+[[[
+The LFSR's length and the taps' positions are the only things you have to
+adjust if your implementation is generic enough.
+]]]
+
+Bonus hint
+[[[
+LFSRs with simple ratios between the length and tap positions can generate
+really funky patterns when you print the results out in two dimensions!
+That's why this challenge uses prime numbers for those :)
+]]]
