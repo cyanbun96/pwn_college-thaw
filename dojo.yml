@@ -3,6 +3,6 @@ name: The House Always Wins
 type: hidden
 password: thawtest
 award:
-  emoji: [dice]
+  emoji: 🎲
 modules:
   - id: thaw
