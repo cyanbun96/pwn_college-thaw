@@ -112,8 +112,12 @@ void initScreen(){
 void updateScreen(char randBit, unsigned long step){
 	sprintf(sb[Y_POS + 5] + 2, "Step: %lu", step);
 	sprintf(sb[Y_POS + 6] + 2, "State: %u", lfsr);
+
+	sprintf(sb[Y_POS + 5] + 30, "Tap1: %lu", tap1);
+	sprintf(sb[Y_POS + 6] + 30, "Tap2: %lu", tap2);
+
 	if(speed == 0)
-		sprintf(sb[Y_POS + 5] + 40, "Enter - advance");
+		sprintf(sb[Y_POS + 5] + 40, "Enter - step");
 	else
 		sprintf(sb[Y_POS + 5] + 40, "Speed: %d", speed);
 	sprintf(sb[Y_POS + 6] + 40, "Ctrl + C - quit");
@@ -150,7 +154,37 @@ unsigned int getRandBit(){
 }
 
 int main(){
-	lfsr = 0b0001100;
+	puts("1 - Start  2 - Settings  3 - Info");
+	char menuin = getchar();
+	getchar(); // eat the newline
+	if(menuin == '1'){
+		lfsr = 0b0001100;
+	}
+	else if(menuin == '3'){
+		puts("LFSR Toy by CyanBun96 2024");
+		puts("for custom pwn.college dojo");
+		puts("The House Always Wins");
+		return 0;
+	}
+	else if(menuin == '2'){
+		puts("Register length (2-26):");
+		scanf("%d", &lfsr_len);
+		puts("Tap 1 position (1-Register length):");
+		scanf("%d", &tap1);
+		puts("Tap 2 position (1-Register length):");
+		scanf("%d", &tap2);
+		puts("Initial state in binary (e.g. 1010111):");
+		scanf("%b", &lfsr);
+		puts("Speed (0-11, 0 - manual control):");
+		scanf("%d", &speed);
+		puts("Hide state (1 - yes, 0 - no):");
+		scanf("%d", &hidden);
+		getchar(); //eat the newline
+	}
+	else{
+		puts("Invalid input!");
+		return 1;
+	}
 	initScreen();
 	updateScreen(-1, 0);
 	drawScreen();
