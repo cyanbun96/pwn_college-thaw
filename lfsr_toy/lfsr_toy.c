@@ -8,6 +8,7 @@
 #define Y_POS 5
 
 int lfsr_len = 7;
+unsigned int lfsr_period = 1;
 unsigned int mask = 0;
 unsigned int lfsr = 1337;
 unsigned int tap1 = 2;
@@ -120,14 +121,17 @@ void updateScreen(char randBit, unsigned long step){
 	sprintf(sb[Y_POS + 5] + 2, "Step: %lu", step);
 	sprintf(sb[Y_POS + 6] + 2, "State: %u", (lfsr & mask));
 
-	sprintf(sb[Y_POS + 5] + 30, "Tap1: %u", tap1);
-	sprintf(sb[Y_POS + 6] + 30, "Tap2: %u", tap2);
+	sprintf(sb[Y_POS + 5] + 19, "Period: %u", lfsr_period);
+	sprintf(sb[Y_POS + 6] + 19, "Loops: %lu", step / lfsr_period);
+
+	sprintf(sb[Y_POS + 5] + 36, "Tap1: %u", tap1);
+	sprintf(sb[Y_POS + 6] + 36, "Tap2: %u", tap2);
 
 	if(speed == 0)
-		sprintf(sb[Y_POS + 5] + 40, "Enter - step");
+		sprintf(sb[Y_POS + 5] + 45, "Enter - step");
 	else
-		sprintf(sb[Y_POS + 5] + 40, "Speed: %d", speed);
-	sprintf(sb[Y_POS + 6] + 40, "Ctrl + C - quit");
+		sprintf(sb[Y_POS + 5] + 45, "Speed: %d", speed);
+	sprintf(sb[Y_POS + 6] + 45, "Ctrl+C - quit");
 
 	// Binary LFSR state, LSB on the right
 	if(!hidden)
@@ -200,6 +204,9 @@ int main(){
 		mask <<= 1;
 		mask |= 1;
 	}
+	for(int i = 0; i < lfsr_len; ++i)
+		lfsr_period *= 2;
+	--lfsr_period;
 	lfsr = lfsr & mask;
 	initScreen();
 	updateScreen(-1, 0);
