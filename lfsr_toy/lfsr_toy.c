@@ -82,10 +82,11 @@ void initScreen(){
 	sprintf(sb[Y_POS - 3] + X_POS + 3, "XOR");
 
 	// Taps and input pipes
-	for(int i = 0; i < lfsr_len * 2 - 9; ++i){
-		sb[Y_POS - 3][X_POS + 9 + i] = '=';
+	if(lfsr_len > 3){
+			for(int i = 0; i < lfsr_len * 2 - 9; ++i)
+				sb[Y_POS - 3][X_POS + 9 + i] = '=';
+			sb[Y_POS - 3][X_POS + lfsr_len * 2] = '#';
 	}
-	sb[Y_POS - 3][X_POS + lfsr_len * 2] = '#';
 	int tap1xpos = X_POS - 1 + lfsr_len * 2 - (tap1 - 1) * 2;
 	sb[Y_POS - 1][tap1xpos] = 'A';
 	if(tap1xpos > X_POS + 8){
