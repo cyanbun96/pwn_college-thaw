@@ -189,8 +189,8 @@ int main(){
 		scanf("%d", &tap1);
 		puts("Tap 2 position (1-Register length):");
 		scanf("%d", &tap2);
-		puts("Initial state in binary (e.g. 1010111):");
-		scanf("%b", &lfsr);
+		puts("Initial state in decimal (e.g. 123):");
+		scanf("%d", &lfsr);
 		puts("Speed (0-11, 0 - manual control):");
 		scanf("%hhd", &speed);
 		puts("Hide internal state (1 - yes, 0 - no):");

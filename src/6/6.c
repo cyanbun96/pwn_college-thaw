@@ -35,6 +35,11 @@ unsigned int getSeed(){
 void getFlag(){
 	char buf[64] = {0};
 	int fd = open("/flag", O_RDONLY);
+	if(!fd){
+		puts("You win! Can't open /flag though, sorry...");
+		puts("consolation flag: pwn.college{gudjob}");
+		exit(7);
+	}
 	read(fd, buf, 63);
 	puts(buf);
 	getchar();
