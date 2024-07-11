@@ -1,7 +1,6 @@
 id: thaw
 name: The House Always Wins
-type: hidden
-password: thawtest
+type: public
 award:
   emoji: 🎲
 modules:
