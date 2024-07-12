@@ -13,7 +13,7 @@ unsigned int tap2 = 7;
 unsigned int getRandBit(){
 	unsigned int ret = lfsr & 1;
 	unsigned int newbit = ((lfsr >> tap1) ^ (lfsr >> tap2)) & 1;
-	lfsr = (lfsr >> 1) | (newbit << lfsr_len);
+	lfsr = (lfsr >> 1) | (newbit << (lfsr_len + 1));
 	return ret;
 }
 
