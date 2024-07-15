@@ -33,11 +33,10 @@ unsigned int getSeed(){
 	char buf[20];
 	memset(buf, 0, 20);
 	int fd = open("/flag", O_RDONLY);
-	if(fd < 1){
+	if(fd < 1 || !read(fd, buf, 19)){
 		puts("Can't open /flag");
 		exit(3);
 	}
-	read(fd, buf, 19);
 	for(int i = 0; buf[i]; ++i)
 		ret += (buf[i] << i % 3) * ((31337 << (i % 5)) ^ i);
 	for(int i = 0; i < 32; ++i)
@@ -48,12 +47,12 @@ unsigned int getSeed(){
 void getFlag(){
 	char buf[64] = {0};
 	int fd = open("/flag", O_RDONLY);
-	if(!fd){
+	if(!fd || !read(fd, buf, 63)){
 		puts("You win! Can't open /flag though, sorry...");
 		puts("consolation flag: pwn.college{gudjob}");
+                getchar();
 		exit(7);
 	}
-	read(fd, buf, 63);
 	puts(buf);
 	getchar();
 	exit(0);

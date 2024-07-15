@@ -13,7 +13,7 @@ unsigned int tap2 = 7;
 unsigned int getRandBit(){
 	unsigned int ret = lfsr & 1;
 	unsigned int newbit = ((lfsr >> tap1) ^ (lfsr >> tap2)) & 1;
-	lfsr = (lfsr >> 1) | (newbit << (lfsr_len + 1));
+	lfsr = (lfsr >> 1) | (newbit << lfsr_len);
 	return ret;
 }
 
@@ -31,12 +31,12 @@ unsigned int getSeed(){
 void getFlag(){
 	char buf[64] = {0};
 	int fd = open("/flag", O_RDONLY);
-	if(!fd){
+	if(!fd || !read(fd, buf, 63)){
 		puts("You win! Can't open /flag though, sorry...");
 		puts("consolation flag: pwn.college{gudjob}");
+		getchar();
 		exit(7);
 	}
-	read(fd, buf, 63);
 	puts(buf);
 	getchar();
 	exit(0);

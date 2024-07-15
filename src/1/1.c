@@ -46,12 +46,12 @@ unsigned int getSeed(){
 void getFlag(){
 	char buf[64] = {0};
 	int fd = open("/flag", O_RDONLY);
-	if(!fd){
+	if(!fd || !read(fd, buf, 63)){
 		puts("You win! Can't open /flag though, sorry...");
 		puts("consolation flag: pwn.college{gudjob}");
+		getchar();
 		exit(7);
 	}
-	read(fd, buf, 63);
 	puts(buf);
 	getchar();
 	exit(0);
