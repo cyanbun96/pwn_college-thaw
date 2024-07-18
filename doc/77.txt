@@ -1,0 +1,46 @@
+Overview
+[[[
+Level 77 - Plot Twist
+
+Difficulty:
+  Rules: [**-] (777 win streak, 30000 rounds)
+  Seed:  XXXXX (getentropy)
+  PRNG:  [****](MT19937)
+]]]
+
+Description
+[[[
+Mersenne Twister, aka MT19937
+First of all, one of the cooler PRNG names.
+And the coolness doesn't stop there!
+It's used everywhere - Python's random, for example.
+And there's a reason: it's Quite Good!
+8/10 algo, like it a lot, will use again.
+]]]
+
+Implementation details
+[[[
+This challenge implements the MT19937 variant - the standard.
+The object names have are exported so the variable names you'll
+see in some decompilers will be the same as in most sources.
+]]]
+
+Intended approach
+[[[
+While looking at the source code was kinda implied as an option before, it's
+more or less expected in this one - /challenge/77.c was written to be read.
+(the others were written to just work lol). Since most descriptions delve into
+details that are outside of our scope (cracking), the code has been simplified
+and commented relatively thoroughly.
+
+Though the algorithm itself may seem intimidating at first, the approach is
+the same as before - read some outputs, deduce the internal state, predict.
+]]]
+
+Hints
+[[[
+The biggest new thing we're interested in is the tempering process. While
+tricky, full "untempering" is totally possible and will allow you to recover
+the number that's directly written to the state array. You know what to do
+from there ;)
+]]]
