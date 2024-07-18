@@ -70,9 +70,9 @@ unsigned int mt19937_rand(mt_state* state){
 }
 
 // ==============================================================
-// -------------------------------------------------------------
+//  ------------------------------------------------------------
 //   End of MT19937-related code, generic challenge code ahead
-// -------------------------------------------------------------
+//  ------------------------------------------------------------
 // ==============================================================
 
 unsigned int randBitsLeft = 0;
@@ -81,7 +81,6 @@ unsigned int randBuf = 0;
 unsigned int getRandBit(){
 	if(!randBitsLeft){
 		randBuf = mt19937_rand(&glob_state);
-		printf("rand: %u\n", randBuf);
 		randBitsLeft = 32;
 	}	
 	randBitsLeft--;
