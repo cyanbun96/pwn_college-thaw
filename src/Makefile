@@ -1,5 +1,5 @@
 # Define directories and source files
-DIRS := 1 2 3 4 5 6 7 77
+DIRS := 1 2 3 4 5 6 7 77 777
 
 # Compiler and flags
 CC := gcc

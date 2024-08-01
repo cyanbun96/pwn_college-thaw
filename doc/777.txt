@@ -1,0 +1,59 @@
+Overview
+[[[
+Level 777 - The DLC
+
+Difficulty:
+  Rules: [***] (777 win streak, 1000 rounds)
+  Seed:  XXXXX (getentropy)
+  PRNG:  [*****]xoroshiro128+)
+]]]
+
+Description
+[[[
+Xoroshiro one-two-eight... Plus.
+ngl the name is half the reason i chose it
+proper final boss name right there
+10/10, but only if you pronounce xoro as zoro
+Its name has an actual meaning, too!
+XOR - ROtate - SHIft - ROtate
+Rotate operation is as simple as the other two
+Think you can handle this one? }:3
+]]]
+
+Approach
+[[[
+Alright, the previous section's tone may seem a bit disingenuous after you put
+some time into solving this challenge. The thing is, while it *is* definitely
+solvable, in theory, I haven't found a good way to do it.
+
+What's a "good" way? The kind that was intended in the previous challs. Taking
+apart the algorithm, understanding it thoroughly and deterministically solving
+the thing like a fancy math equation. For this one, unfortunately, I couldn't
+find any public solutions that would reverse it this way. The only relatively
+reliable solution involves using z3.
+
+z3 is a magic tool where you can stuff some numbers and it will give you the
+answer. Well, may. About 50/50 chance in my tests. The exact kind of magic it
+employs makes me feel dumb and is absolutely beyond this module's already
+stretched scope. And even then it can't find the solution reliably!
+
+The thing is, a deterministic solution *IS* possible, and even incredibly easy
+to implement! Just bruteforce the 128 bit state... aint nobody got time for dat
+
+If you do solve this one, take a look at the next section.
+]]]
+
+The True End
+[[[
+Level 7777777
+
+Difficulty:
+  Rules: [******777 win streak, 1000 rounds, 777 times)
+  Seed:  XXXXX (getentropy)
+  PRNG:  [*****]xoroshiro128+)
+
+  The state must reset after each full win streak.
+  Only a deterministic solution will work.
+  
+  -Cyan
+]]]
